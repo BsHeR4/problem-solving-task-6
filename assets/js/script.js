@@ -5,12 +5,29 @@
 // Input: "javascript"
 // Output: "tpircsavaj"
 
+function reverseWord(word, reversedWord = "", index = 0) {
 
+    if (index == word.length)
+        return reversedWord;
 
+    return reverseWord(word, word[index] + reversedWord, ++index);
+}
 
+let reversedWord = reverseWord("javascript");
+console.log(reversedWord);
 
-
-
+/*
+ 1- j
+ 2- aj
+ 3- vaj
+ 4- avaj
+ 5- savaj
+ 6- csavaj
+ 7- rcsavaj
+ 8- ircsavaj
+ 9- pircsavaj
+ 10- tpircsavaj
+*/
 
 
 
@@ -34,9 +51,16 @@
 // Output: false
 
 
+function palindrome(word, left = 0, right = word.length - 1) {
+    if (left >= right)
+        return true;
+    if (word[left] != word[right])
+        return false;
 
+    return palindrome(word, ++left, --right);
+}
 
-
+console.log(palindrome("madam"));
 
 
 
@@ -59,9 +83,27 @@
 // Input: [1, 5, 3, 9, 2]
 // Output: 9
 
+function maxIndex(array, max = 0, index = 1) {
 
+    if (index == array.length)
+        return array[max];
 
+    if (array[index] > array[max])
+        max = index;
 
+    return maxIndex(array, max, ++index);
+
+}
+
+function largestNumber(array) {
+
+    if (array.length == 0)
+        return undefined;
+
+    return maxIndex(array);
+}
+
+console.log(largestNumber([1, 5, 3, 9, 2]));
 
 
 
@@ -86,8 +128,12 @@
 // Output: 120
 
 
-
-
+function factorial(number) {
+    if (number == 1)
+        return number;
+    return number * factorial(--number);
+}
+console.log(factorial(5));
 
 
 
@@ -114,10 +160,14 @@
 // Output: false (because it's divisible by 2 and 5)
 
 
-
-
-
-
+function primeNumber(number, divisor = 2) {
+    if (number == divisor)
+        return true;
+    if (number % divisor == 0 || number <= 1)
+        return false;
+    return primeNumber(number, ++divisor)
+}
+console.log(primeNumber(7));
 
 
 
@@ -139,8 +189,31 @@
 // Input: [1, 2, 2, 3, 4, 4, 5]
 // Output: [1, 2, 3, 4, 5]
 
+function removeDuplicated(array, unduplicatedArray = [], arrayIndex = 0, unduplicatedArrayIndex = 0) {
 
+    if (arrayIndex == array.length)
+        return unduplicatedArray;
+    if (checkDuplicated(array[arrayIndex], unduplicatedArray)) {
 
+        unduplicatedArray[unduplicatedArrayIndex] = array[arrayIndex];
+        unduplicatedArrayIndex++;
+    }
+
+    return removeDuplicated(array, unduplicatedArray, ++arrayIndex, unduplicatedArrayIndex);
+
+}
+
+function checkDuplicated(element, unduplicatedArray, index = 0) {
+
+    if (index == unduplicatedArray.length)
+        return true;
+
+    if (unduplicatedArray[index] == element)
+        return false;
+
+    return checkDuplicated(element, unduplicatedArray, ++index);
+}
+console.log(removeDuplicated([1, 2, 2, 3, 4, 4, 5, 7]));
 
 
 
@@ -168,8 +241,26 @@
 
 
 
+function missingNumber(array, start, end, index = 0, sequence = start) {
+    if (index == array.length && sequence != end)
+        return 'not found';
+    if (array[index] != sequence)
+        return sequence;
+    return missingNumber(array, start, end, ++index, ++sequence);
+}
 
+function generateArrayWithMissingNumber(start, end, missing, array = [], index = 0) {
+    if (start > end)
+        return array;
 
+    if (start != missing)
+        array[index++] = start;
+
+    return generateArrayWithMissingNumber(start + 1, end, missing, array, index);
+
+}
+
+console.log(missingNumber(generateArrayWithMissingNumber(1, 1000, 250), 1, 1000));
 
 
 
@@ -192,12 +283,21 @@
 // Output: "Hello World From Javascript"
 
 
+function capitalizeSentence(sentence, index = 0, capitalizedSentence = '') {
+    if (index == sentence.length)
+        return capitalizedSentence;
 
+    if (sentence[index - 1] == ' ' || index == 0)
+        return capitalizeSentence(sentence, index + 1, capitalizedSentence + capitalizeLetter(sentence[index]));
 
+    return capitalizeSentence(sentence, index + 1, capitalizedSentence + sentence[index]);
+}
 
+function capitalizeLetter(letter) {
+    return String.fromCharCode((letter.charCodeAt() - 32));
+}
 
-
-
+console.log(capitalizeSentence('hello world from javascript'));
 
 
 
@@ -219,9 +319,48 @@
 // Input: "hello", "world"
 // Output: false
 
+function anagrams(firstWord, seconedWord) {
+    firstWord = countLetters(firstWord);
+    seconedWord = countLetters(seconedWord);
 
+    return checkObjects(firstWord, seconedWord);
+}
 
+function checkObjects(firstWord, seconedWord, keys = Object.keys(firstWord), index = 0) {
+    if (keys.length != Object.keys(seconedWord).length)
+        return false;
 
+    if (index == keys.length)
+        return true;
+
+    let key = keys[index];
+
+    if (firstWord[key] != seconedWord[key])
+        return false;
+
+    return checkObjects(firstWord, seconedWord, keys, index + 1);
+}
+
+function countLetters(word, letterIndex = 0, wordIndex = 0, object = {}, count = 0) {
+
+    if (typeof object[word[letterIndex]] != 'undefined')
+        return countLetters(word, letterIndex + 1, 0, object, 0);
+
+    if (letterIndex == word.length)
+        return object;
+
+    if (wordIndex == word.length) {
+        object[word[letterIndex]] = count;
+        return countLetters(word, letterIndex + 1, 0, object, 0);
+    }
+
+    if (word[letterIndex] == word[wordIndex])
+        count++;
+
+    return countLetters(word, letterIndex, wordIndex + 1, object, count);
+}
+
+console.log(anagrams("silent", "listen"));
 
 
 
@@ -245,9 +384,21 @@
 // Input: [1, 2, 3, 4, 5, 6, 7], 3
 // Output: [[1, 2, 3], [4, 5, 6], [7]]
 
+function chunkArray(array, size, subarrays = [], arrayIndex = 0, subarraysIndex = 0, subarrayInnerIndex = 0) {
+    if (arrayIndex == array.length)
+        return subarrays;
 
+    if (typeof subarrays[subarraysIndex] == 'undefined')
+        subarrays[subarraysIndex] = [];
 
+    if (subarrays[subarraysIndex].length < size) {
+        subarrays[subarraysIndex][subarrayInnerIndex] = array[arrayIndex];
+        return chunkArray(array, size, subarrays, arrayIndex + 1, subarraysIndex, subarrayInnerIndex + 1);
+    }
+    return chunkArray(array, size, subarrays, arrayIndex, subarraysIndex + 1);
+}
 
+console.log(chunkArray([1, 2, 3, 4, 5, 6, 7], 3));
 
 
 
@@ -271,12 +422,22 @@
 // Input: [10, 5, 2, 7, 8, 3], 10
 // Output: [2, 8]
 
+function sumTarget(array, target, numberIndex = 0, index = 1) {
+    if (numberIndex == array.length)
+        return 'not found';
 
+    let sum = array[numberIndex] + array[index];
 
+    if (sum == target)
+        return [array[numberIndex], array[index]];
 
+    if (index == array.length)
+        return sumTarget(array, target, numberIndex + 1, numberIndex + 2);
 
+    return sumTarget(array, target, numberIndex, index + 1);
+}
 
-
+console.log(sumTarget([10, 5, 2, 7, 8, 3], 10));
 
 
 
@@ -297,10 +458,33 @@
 // Input: [1, 2, 3, 4, 5], 2
 // Output: [3, 4, 5, 1, 2]
 
+function rotateArray(array, number, newArray = [], index = 0) {
+    if (index == array.length)
+        return newArray;
 
+    let newIndex = index - number;
 
+    if (newIndex < 0) {
+        newArray[newIndex + array.length] = array[index];
+        return rotateArray(array, number, newArray, index + 1);
+    }
 
+    newArray[newIndex] = array[index];
 
+    return rotateArray(array, number, newArray, index + 1);
+
+}
+
+console.log(rotateArray([1, 2, 3, 4, 5], 2));
+
+/**
+ * 1- نريد ازاحة العدد الحالي بمقدار رقم نحو اليسار
+ * 2- لمعرفة فهرس العنصر المراد ازاحته نحو اليسار يجب طرح الرقم من الفهرس الحالي
+ * index - number
+ * 3- في حال كان طرح الرقم هو اصغر من الصفر يجب معالجة الحالة
+ * ويتم هذا بجمع ناتج طرح الفهرس من الرقم مجموعاً اليه طول المصفوفةابتداء من الفهرس 1
+ * اي array.length
+ */
 
 
 
@@ -325,7 +509,21 @@
 
 
 
+function findIntersection(firstArray, seconedArray, intersectionArray = [], firstIndex = 0, seconedIndex = 0, intersectionIndex = 0) {
+    if (firstIndex == firstArray.length)
+        return intersectionArray;
 
+    if (firstArray[firstIndex] == seconedArray[seconedIndex]) {
+        intersectionArray[intersectionIndex] = firstArray[firstIndex];
+        return findIntersection(firstArray, seconedArray, intersectionArray, firstIndex + 1, 0, intersectionIndex + 1);
+    }
+
+    if (seconedIndex == seconedArray.length - 1)
+        return findIntersection(firstArray, seconedArray, intersectionArray, firstIndex + 1, 0, intersectionIndex);
+
+    return findIntersection(firstArray, seconedArray, intersectionArray, firstIndex, seconedIndex + 1, intersectionIndex);
+}
+console.log(findIntersection([1, 2, 3, 4], [3, 4, 5, 6]));
 
 
 
@@ -349,7 +547,7 @@
 // Input: "hello"
 // Output: { h: 1, e: 1, l: 2, o: 1 }
 
-
+console.log(countLetters("hello"));
 
 
 
@@ -375,11 +573,35 @@
 // Input: [1, [2, 3], [4, [5, 6]]]
 // Output: [1, 2, 3, 4, 5, 6]
 
+function flattenArray(array, newArray = [], index = 0, newArrayIndex = 0) {
 
+    if (index == array.length)
+        return newArray;
 
+    if (typeof array[index] == 'object') {
+        newArrayIndex = flattenArray(flattenArray(array[index]), newArray, 0, newArrayIndex).length - 1;
+    }
+    else {
+        newArray[newArrayIndex] = array[index];
+    }
 
+    return flattenArray(array, newArray, index + 1, newArrayIndex + 1);
+}
+console.log(flattenArray([1, [2, 3], [4, [5, 6]]]));
 
-
+/**
+ *
+ * 1- معرفة ما اذا كان الفهرس الحالي يدل على عنصر عادي او مصفوفة
+ * لمعرفة على ماذا يدل يجب علينا فحصه عن طريق typeof: (بما ان isArray غير مسموح بها على ما اذكر كما قيل ضمن الجلسة)
+ *
+ * اذا كان عنصر عادي يقطع الشرط ونقوم بتخزينه ضمن مصفوفة جديدة
+ * عن طريق تمرير فهرس خاص بالمصفوفة الجديدة
+ * ومن ثم نقوم بزيادة فهرس المصفوفة الاصل
+ *
+ * اذا كان العنصر عبارة عن مصفوفة يدخل الى الشرط ويتم استدعاءالتابع ذاته
+ * ونقوم بتخزين نتيجة هذا التابع باستخدام .length بالفهرس الخاص بالمصفوفة الجديدة لمعرفة الطول الجديد
+ *
+ */
 
 
 
@@ -403,14 +625,47 @@
 
 
 
+function findLongestWord(sentence, words = chunkSentence(sentence), index = 1, longestWord = words[0]) {
+    if (index == words.length)
+        return longestWord;
 
+    let currentWord = words[index];
+    let currentLength = countWord(countLetters(currentWord));
+    let longestLength = countWord(countLetters(longestWord));
 
+    if (currentLength > longestLength)
+        longestWord = currentWord;
 
+    return findLongestWord(sentence, words, index + 1, longestWord);
 
+}
 
+function countWord(word, index = 0, values = Object.values(word)) {
+    if (index == values.length)
+        return word;
+    if (index == 0)
+        word = 0;
 
+    return countWord(word + values[index], index + 1, values);
+}
 
+function chunkSentence(sentence, words = [], wordsIndex = 0, sentenceIndex = 0,) {
+    if (sentenceIndex == sentence.length)
+        return words;
 
+    if (sentence[sentenceIndex] != ' ') {
+        if (typeof words[wordsIndex] == "undefined")
+            words[wordsIndex] = '';
+
+        words[wordsIndex] += sentence[sentenceIndex]
+
+        return chunkSentence(sentence, words, wordsIndex, sentenceIndex + 1);
+    }
+
+    return chunkSentence(sentence, words, wordsIndex + 1, sentenceIndex + 1);
+}
+
+console.log(findLongestWord("The quick brown fox jumped over the lazy dog"));
 
 
 
@@ -430,7 +685,24 @@
 // Output: 'a'
 
 
+function mostFrequent(array) {
 
+    array = countLetters(array);
+    return compareMaxValues(Object.keys(array), Object.values(array))
+}
+
+function compareMaxValues(keys, values, index = 0, maxIndex = 1) {
+    if (index == values.length)
+        return keys[maxIndex];
+
+    if (values[index] > values[maxIndex])
+        maxIndex = index;
+
+    return compareMaxValues(keys, values, index + 1, maxIndex);
+
+}
+
+console.log(mostFrequent([1, 2, 3, 2, 2, 4, 5, 2]));
 
 
 
@@ -460,13 +732,22 @@
 
 
 
+function bubbleSort(array, firstIndex = 0, seconedIndex = 1) {
+    if (seconedIndex == array.length)
+        return array;
 
+    if (firstIndex == array.length - seconedIndex)
+        return bubbleSort(array, 0, seconedIndex + 1);
 
+    if (array[firstIndex + 1].age < array[firstIndex].age) {
+        let temp = array[firstIndex];
+        array[firstIndex] = array[firstIndex + 1];
+        array[firstIndex + 1] = temp;
+    }
 
-
-
-
-
+    return bubbleSort(array, firstIndex + 1, seconedIndex);
+}
+console.log(bubbleSort([{ name: "Alice", age: 30 }, { name: "Bob", age: 25 }, { name: "Charlie", age: 35 }, { name: "Charlie", age: 1 }, { name: "Charlie", age: 10 }, { name: "Charlie", age: 5 }]));
 
 
 
@@ -484,8 +765,22 @@
 // Input: "aabbcc"
 // Output: null (or a suitable message)
 
+function nonRepeatingChar(string) {
 
+    string = countLetters(string);
+    return compareMinValues(Object.keys(string), Object.values(string));
+}
 
+function compareMinValues(keys, values, index = 0) {
+    if (index == values.length)
+        return 'not found';
+
+    if (values[index] == 1)
+        return keys[index];
+
+    return compareMinValues(keys, values, index + 1);
+}
+console.log(nonRepeatingChar("swiss"));
 
 
 
@@ -509,3 +804,34 @@
 // Input: [1, 2, 3], [3, 4, 5]
 // Output: [1, 2, 4, 5]
 
+function symmetric(firstArray, seconedArray) {
+
+    let array = countLetters(mergeArray(firstArray, seconedArray));
+
+    return filterArray(Object.keys(array), Object.values(array));
+}
+
+function filterArray(keys, values, newArray = [], index = 0, newArrayIndex = 0, numberOfRepeatElement = 1) {
+    if (index == keys.length)
+        return newArray;
+
+    if (values[index] == numberOfRepeatElement) {
+        newArray[newArrayIndex] = keys[index];
+        return filterArray(keys, values, newArray, index + 1, newArrayIndex + 1);
+    }
+
+    return filterArray(keys, values, newArray, index + 1, newArrayIndex);
+
+}
+
+function mergeArray(array, newArray, index = array.length, newArrayIndex = 0) {
+
+    if (newArrayIndex == newArray.length)
+        return array;
+
+    array[index] = newArray[newArrayIndex];
+
+    return mergeArray(array, newArray, index + 1, newArrayIndex + 1);
+}
+
+console.log(symmetric([1, 2, 3], [3, 4, 5]));

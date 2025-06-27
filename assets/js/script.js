@@ -5,6 +5,15 @@
 // Input: "javascript"
 // Output: "tpircsavaj"
 
+
+/**
+ * @function reverseWord
+ * @description Reverses the input string using recursion.
+ * @param {string} word - The word to be reversed.
+ * @param {string} [reversedWord=""] - Accumulates the reversed characters.
+ * @param {number} [index=0] - Current index in the original word.
+ * @returns {string} The reversed string.
+ */
 function reverseWord(word, reversedWord = "", index = 0) {
 
     if (index == word.length)
@@ -50,7 +59,14 @@ console.log(reversedWord);
 // Input: "hello"
 // Output: false
 
-
+/**
+ * @function palindrome
+ * @description Checks if a string is a palindrome using recursion.
+ * @param {string} word - The string to check.
+ * @param {number} [left=0] - Left pointer.
+ * @param {number} [right=word.length - 1] - Right pointer.
+ * @returns {boolean} True if palindrome, otherwise false.
+ */
 function palindrome(word, left = 0, right = word.length - 1) {
     if (left >= right)
         return true;
@@ -83,6 +99,14 @@ console.log(palindrome("madam"));
 // Input: [1, 5, 3, 9, 2]
 // Output: 9
 
+/**
+ * @function maxIndex
+ * @description Recursively finds the index of the maximum number in the array.
+ * @param {number[]} array - The array to search.
+ * @param {number} [max=0] - Index of the current max value.
+ * @param {number} [index=1] - Current index being evaluated.
+ * @returns {number} The maximum number in the array.
+ */
 function maxIndex(array, max = 0, index = 1) {
 
     if (index == array.length)
@@ -95,6 +119,12 @@ function maxIndex(array, max = 0, index = 1) {
 
 }
 
+/**
+ * @function largestNumber
+ * @description Finds the largest number in the array.
+ * @param {number[]} array - The array to evaluate.
+ * @returns {number|undefined} Largest number or undefined for empty arrays.
+ */
 function largestNumber(array) {
 
     if (array.length == 0)
@@ -127,7 +157,12 @@ console.log(largestNumber([1, 5, 3, 9, 2]));
 // Input: 5
 // Output: 120
 
-
+/**
+ * @function factorial
+ * @description Calculates factorial of a number using recursion.
+ * @param {number} number - The number to calculate factorial for.
+ * @returns {number} The factorial result.
+ */
 function factorial(number) {
     if (number == 1)
         return number;
@@ -160,6 +195,13 @@ console.log(factorial(5));
 // Output: false (because it's divisible by 2 and 5)
 
 
+/**
+ * @function primeNumber
+ * @description Checks if a number is prime using recursion.
+ * @param {number} number - The number to check.
+ * @param {number} [divisor=2] - Current divisor being tested.
+ * @returns {boolean} True if prime, otherwise false.
+ */
 function primeNumber(number, divisor = 2) {
     if (number == divisor)
         return true;
@@ -189,6 +231,15 @@ console.log(primeNumber(7));
 // Input: [1, 2, 2, 3, 4, 4, 5]
 // Output: [1, 2, 3, 4, 5]
 
+/**
+ * @function removeDuplicated
+ * @description Removes duplicates from the array.
+ * @param {any[]} array - The array to process.
+ * @param {any[]} [unduplicatedArray=[]] - Array holding unique values.
+ * @param {number} [arrayIndex=0] - Current index in the original array.
+ * @param {number} [unduplicatedArrayIndex=0] - Index in the new array.
+ * @returns {any[]} Array with unique elements.
+ */
 function removeDuplicated(array, unduplicatedArray = [], arrayIndex = 0, unduplicatedArrayIndex = 0) {
 
     if (arrayIndex == array.length)
@@ -203,6 +254,14 @@ function removeDuplicated(array, unduplicatedArray = [], arrayIndex = 0, undupli
 
 }
 
+/**
+ * @function checkDuplicated
+ * @description Checks if an element is already in the unique array.
+ * @param {any} element - Element to check.
+ * @param {any[]} unduplicatedArray - Array of unique elements.
+ * @param {number} [index=0] - Current index in unique array.
+ * @returns {boolean} True if not found (unique), false if duplicate.
+ */
 function checkDuplicated(element, unduplicatedArray, index = 0) {
 
     if (index == unduplicatedArray.length)
@@ -240,7 +299,16 @@ console.log(removeDuplicated([1, 2, 2, 3, 4, 4, 5, 7]));
 
 
 
-
+/**
+ * @function missingNumber
+ * @description Finds the missing number in a range-based sequence.
+ * @param {number[]} array - Array missing one element in sequence.
+ * @param {number} start - Start of the expected sequence.
+ * @param {number} end - End of the expected sequence.
+ * @param {number} [index=0] - Index in the array.
+ * @param {number} [sequence=start] - Current expected number in sequence.
+ * @returns {number|string} The missing number or "not found".
+ */
 function missingNumber(array, start, end, index = 0, sequence = start) {
     if (index == array.length && sequence != end)
         return 'not found';
@@ -249,6 +317,16 @@ function missingNumber(array, start, end, index = 0, sequence = start) {
     return missingNumber(array, start, end, ++index, ++sequence);
 }
 
+/**
+ * @function generateArrayWithMissingNumber
+ * @description Generates a sequential array with one missing number.
+ * @param {number} start - Start of sequence.
+ * @param {number} end - End of sequence.
+ * @param {number} missing - The number to omit.
+ * @param {number[]} [array=[]] - Accumulator array.
+ * @param {number} [index=0] - Current index in result array.
+ * @returns {number[]} Array with one missing value.
+ */
 function generateArrayWithMissingNumber(start, end, missing, array = [], index = 0) {
     if (start > end)
         return array;
@@ -283,6 +361,14 @@ console.log(missingNumber(generateArrayWithMissingNumber(1, 1000, 250), 1, 1000)
 // Output: "Hello World From Javascript"
 
 
+/**
+ * @function capitalizeSentence
+ * @description Capitalizes the first letter of each word in a sentence.
+ * @param {string} sentence - The input sentence.
+ * @param {number} [index=0] - Current index.
+ * @param {string} [capitalizedSentence=""] - Accumulator string.
+ * @returns {string} Capitalized sentence.
+ */
 function capitalizeSentence(sentence, index = 0, capitalizedSentence = '') {
     if (index == sentence.length)
         return capitalizedSentence;
@@ -293,6 +379,12 @@ function capitalizeSentence(sentence, index = 0, capitalizedSentence = '') {
     return capitalizeSentence(sentence, index + 1, capitalizedSentence + sentence[index]);
 }
 
+/**
+ * @function capitalizeLetter
+ * @description Converts a lowercase letter to uppercase.
+ * @param {string} letter - Single lowercase character.
+ * @returns {string} Capital letter.
+ */
 function capitalizeLetter(letter) {
     return String.fromCharCode((letter.charCodeAt() - 32));
 }
@@ -319,6 +411,14 @@ console.log(capitalizeSentence('hello world from javascript'));
 // Input: "hello", "world"
 // Output: false
 
+
+/**
+ * @function anagrams
+ * @description Checks if two strings are anagrams of each other.
+ * @param {string} firstWord - First string.
+ * @param {string} seconedWord - Second string.
+ * @returns {boolean} True if anagrams, otherwise false.
+ */
 function anagrams(firstWord, seconedWord) {
     firstWord = countLetters(firstWord);
     seconedWord = countLetters(seconedWord);
@@ -326,6 +426,15 @@ function anagrams(firstWord, seconedWord) {
     return checkObjects(firstWord, seconedWord);
 }
 
+/**
+ * @function checkObjects
+ * @description Recursively compares two frequency maps.
+ * @param {Object} firstWord - Frequency map of first word.
+ * @param {Object} seconedWord - Frequency map of second word.
+ * @param {string[]} [keys=Object.keys(firstWord)] - Keys to compare.
+ * @param {number} [index=0] - Current key index.
+ * @returns {boolean} True if frequency maps match, false otherwise.
+ */
 function checkObjects(firstWord, seconedWord, keys = Object.keys(firstWord), index = 0) {
     if (keys.length != Object.keys(seconedWord).length)
         return false;
@@ -339,25 +448,6 @@ function checkObjects(firstWord, seconedWord, keys = Object.keys(firstWord), ind
         return false;
 
     return checkObjects(firstWord, seconedWord, keys, index + 1);
-}
-
-function countLetters(word, letterIndex = 0, wordIndex = 0, object = {}, count = 0) {
-
-    if (typeof object[word[letterIndex]] != 'undefined')
-        return countLetters(word, letterIndex + 1, 0, object, 0);
-
-    if (letterIndex == word.length)
-        return object;
-
-    if (wordIndex == word.length) {
-        object[word[letterIndex]] = count;
-        return countLetters(word, letterIndex + 1, 0, object, 0);
-    }
-
-    if (word[letterIndex] == word[wordIndex])
-        count++;
-
-    return countLetters(word, letterIndex, wordIndex + 1, object, count);
 }
 
 console.log(anagrams("silent", "listen"));
@@ -384,6 +474,17 @@ console.log(anagrams("silent", "listen"));
 // Input: [1, 2, 3, 4, 5, 6, 7], 3
 // Output: [[1, 2, 3], [4, 5, 6], [7]]
 
+/**
+ * @function chunkArray
+ * @description Splits array into subarrays of fixed size.
+ * @param {any[]} array - Original array.
+ * @param {number} size - Chunk size.
+ * @param {any[][]} [subarrays=[]] - Result container.
+ * @param {number} [arrayIndex=0] - Current index in original array.
+ * @param {number} [subarraysIndex=0] - Current subarray index.
+ * @param {number} [subarrayInnerIndex=0] - Index within a chunk.
+ * @returns {any[][]} Array of chunks.
+ */
 function chunkArray(array, size, subarrays = [], arrayIndex = 0, subarraysIndex = 0, subarrayInnerIndex = 0) {
     if (arrayIndex == array.length)
         return subarrays;
@@ -422,6 +523,15 @@ console.log(chunkArray([1, 2, 3, 4, 5, 6, 7], 3));
 // Input: [10, 5, 2, 7, 8, 3], 10
 // Output: [2, 8]
 
+/**
+ * @function sumTarget
+ * @description Finds first pair of numbers that sum to target.
+ * @param {number[]} array - Array to search.
+ * @param {number} target - Target sum.
+ * @param {number} [numberIndex=0] - Index of first number.
+ * @param {number} [index=1] - Index of second number.
+ * @returns {number[]|string} Pair that sums to target or "not found".
+ */
 function sumTarget(array, target, numberIndex = 0, index = 1) {
     if (numberIndex == array.length)
         return 'not found';
@@ -458,6 +568,15 @@ console.log(sumTarget([10, 5, 2, 7, 8, 3], 10));
 // Input: [1, 2, 3, 4, 5], 2
 // Output: [3, 4, 5, 1, 2]
 
+/**
+ * @function rotateArray
+ * @description Rotates array to the left by n positions.
+ * @param {any[]} array - Array to rotate.
+ * @param {number} number - Number of positions to rotate.
+ * @param {any[]} [newArray=[]] - Resulting rotated array.
+ * @param {number} [index=0] - Current index in original array.
+ * @returns {any[]} Rotated array.
+ */
 function rotateArray(array, number, newArray = [], index = 0) {
     if (index == array.length)
         return newArray;
@@ -508,7 +627,17 @@ console.log(rotateArray([1, 2, 3, 4, 5], 2));
 // Output: [3, 4]
 
 
-
+/**
+ * @function findIntersection
+ * @description Returns elements common to both arrays.
+ * @param {any[]} firstArray - First array.
+ * @param {any[]} seconedArray - Second array.
+ * @param {any[]} [intersectionArray=[]] - Result container.
+ * @param {number} [firstIndex=0] - Index in first array.
+ * @param {number} [seconedIndex=0] - Index in second array.
+ * @param {number} [intersectionIndex=0] - Index in result array.
+ * @returns {any[]} Array of common elements.
+ */
 function findIntersection(firstArray, seconedArray, intersectionArray = [], firstIndex = 0, seconedIndex = 0, intersectionIndex = 0) {
     if (firstIndex == firstArray.length)
         return intersectionArray;
@@ -547,6 +676,36 @@ console.log(findIntersection([1, 2, 3, 4], [3, 4, 5, 6]));
 // Input: "hello"
 // Output: { h: 1, e: 1, l: 2, o: 1 }
 
+
+/**
+ * @function countLetters
+ * @description Counts character frequency in a string or array.
+ * @param {string|any[]} word - Input string or array.
+ * @param {number} [letterIndex=0] - Current key index.
+ * @param {number} [wordIndex=0] - Comparison index.
+ * @param {Object} [object={}] - Frequency map.
+ * @param {number} [count=0] - Counter.
+ * @returns {Object} Character frequency map.
+ */
+function countLetters(word, letterIndex = 0, wordIndex = 0, object = {}, count = 0) {
+
+    if (typeof object[word[letterIndex]] != 'undefined')
+        return countLetters(word, letterIndex + 1, 0, object, 0);
+
+    if (letterIndex == word.length)
+        return object;
+
+    if (wordIndex == word.length) {
+        object[word[letterIndex]] = count;
+        return countLetters(word, letterIndex + 1, 0, object, 0);
+    }
+
+    if (word[letterIndex] == word[wordIndex])
+        count++;
+
+    return countLetters(word, letterIndex, wordIndex + 1, object, count);
+}
+
 console.log(countLetters("hello"));
 
 
@@ -573,6 +732,15 @@ console.log(countLetters("hello"));
 // Input: [1, [2, 3], [4, [5, 6]]]
 // Output: [1, 2, 3, 4, 5, 6]
 
+/**
+ * @function flattenArray
+ * @description Recursively flattens a nested array into a single-level array.
+ * @param {any[]} array - Input nested array.
+ * @param {any[]} [newArray=[]] - Result array.
+ * @param {number} [index=0] - Index in original array.
+ * @param {number} [newArrayIndex=0] - Index in result array.
+ * @returns {any[]} Flattened array.
+ */
 function flattenArray(array, newArray = [], index = 0, newArrayIndex = 0) {
 
     if (index == array.length)
@@ -624,7 +792,15 @@ console.log(flattenArray([1, [2, 3], [4, [5, 6]]]));
 // Output: "jumped"
 
 
-
+/**
+ * @function findLongestWord
+ * @description Returns the longest word in a sentence.
+ * @param {string} sentence - Input sentence.
+ * @param {string[]} [words=chunkSentence(sentence)] - Array of words.
+ * @param {number} [index=1] - Current index in words.
+ * @param {string} [longestWord=words[0]] - Longest word so far.
+ * @returns {string} The longest word.
+ */
 function findLongestWord(sentence, words = chunkSentence(sentence), index = 1, longestWord = words[0]) {
     if (index == words.length)
         return longestWord;
@@ -640,6 +816,14 @@ function findLongestWord(sentence, words = chunkSentence(sentence), index = 1, l
 
 }
 
+/**
+ * @function countWord
+ * @description Counts total number of characters in a frequency object.
+ * @param {Object|number} word - Frequency object.
+ * @param {number} [index=0] - Current index.
+ * @param {number[]} [values=Object.values(word)] - Frequency values.
+ * @returns {number} Total count.
+ */
 function countWord(word, index = 0, values = Object.values(word)) {
     if (index == values.length)
         return word;
@@ -649,6 +833,15 @@ function countWord(word, index = 0, values = Object.values(word)) {
     return countWord(word + values[index], index + 1, values);
 }
 
+/**
+ * @function chunkSentence
+ * @description Splits a sentence into words (by space).
+ * @param {string} sentence - Input sentence.
+ * @param {string[]} [words=[]] - Words array.
+ * @param {number} [wordsIndex=0] - Word index.
+ * @param {number} [sentenceIndex=0] - Sentence index.
+ * @returns {string[]} Array of words.
+ */
 function chunkSentence(sentence, words = [], wordsIndex = 0, sentenceIndex = 0,) {
     if (sentenceIndex == sentence.length)
         return words;
@@ -684,13 +877,27 @@ console.log(findLongestWord("The quick brown fox jumped over the lazy dog"));
 // Input: ['a', 'b', 'c', 'a', 'b', 'a']
 // Output: 'a'
 
-
+/**
+ * @function mostFrequent
+ * @description Returns the most frequent element in an array.
+ * @param {any[]} array - Input array.
+ * @returns {any} The most frequent element.
+ */
 function mostFrequent(array) {
 
     array = countLetters(array);
     return compareMaxValues(Object.keys(array), Object.values(array))
 }
 
+/**
+ * @function compareMaxValues
+ * @description Finds the key with the highest value.
+ * @param {string[]} keys - Keys of frequency map.
+ * @param {number[]} values - Values of frequency map.
+ * @param {number} [index=0] - Current index.
+ * @param {number} [maxIndex=1] - Index of max value.
+ * @returns {string} Key with highest frequency.
+ */
 function compareMaxValues(keys, values, index = 0, maxIndex = 1) {
     if (index == values.length)
         return keys[maxIndex];
@@ -731,7 +938,14 @@ console.log(mostFrequent([1, 2, 3, 2, 2, 4, 5, 2]));
 
 
 
-
+/**
+ * @function bubbleSort
+ * @description Sorts an array of objects by the "age" property using Bubble Sort.
+ * @param {Object[]} array - Array of objects with an "age" property.
+ * @param {number} [firstIndex=0] - Current index being compared.
+ * @param {number} [seconedIndex=1] - Current pass number.
+ * @returns {Object[]} Sorted array.
+ */
 function bubbleSort(array, firstIndex = 0, seconedIndex = 1) {
     if (seconedIndex == array.length)
         return array;
@@ -765,12 +979,26 @@ console.log(bubbleSort([{ name: "Alice", age: 30 }, { name: "Bob", age: 25 }, { 
 // Input: "aabbcc"
 // Output: null (or a suitable message)
 
+/**
+ * @function nonRepeatingChar
+ * @description Finds the first non-repeating character in a string.
+ * @param {string} string - Input string.
+ * @returns {string} First unique character or 'not found'.
+ */
 function nonRepeatingChar(string) {
 
     string = countLetters(string);
     return compareMinValues(Object.keys(string), Object.values(string));
 }
 
+/**
+ * @function compareMinValues
+ * @description Returns the first key with value of 1.
+ * @param {string[]} keys - Frequency map keys.
+ * @param {number[]} values - Frequency map values.
+ * @param {number} [index=0] - Current index.
+ * @returns {string} First non-repeating character or 'not found'.
+ */
 function compareMinValues(keys, values, index = 0) {
     if (index == values.length)
         return 'not found';
@@ -804,6 +1032,13 @@ console.log(nonRepeatingChar("swiss"));
 // Input: [1, 2, 3], [3, 4, 5]
 // Output: [1, 2, 4, 5]
 
+/**
+ * @function symmetric
+ * @description Finds elements present in one array but not both.
+ * @param {any[]} firstArray - First array.
+ * @param {any[]} seconedArray - Second array.
+ * @returns {any[]} Symmetric difference array.
+ */
 function symmetric(firstArray, seconedArray) {
 
     let array = countLetters(mergeArray(firstArray, seconedArray));
@@ -811,6 +1046,18 @@ function symmetric(firstArray, seconedArray) {
     return filterArray(Object.keys(array), Object.values(array));
 }
 
+
+/**
+ * @function filterArray
+ * @description Filters keys that occur exactly once.
+ * @param {string[]} keys - Frequency map keys.
+ * @param {number[]} values - Frequency map values.
+ * @param {any[]} [newArray=[]] - Result array.
+ * @param {number} [index=0] - Current index.
+ * @param {number} [newArrayIndex=0] - Index in result array.
+ * @param {number} [numberOfRepeatElement=1] - Required occurrence count.
+ * @returns {any[]} Filtered array.
+ */
 function filterArray(keys, values, newArray = [], index = 0, newArrayIndex = 0, numberOfRepeatElement = 1) {
     if (index == keys.length)
         return newArray;
@@ -824,6 +1071,15 @@ function filterArray(keys, values, newArray = [], index = 0, newArrayIndex = 0, 
 
 }
 
+/**
+ * @function mergeArray
+ * @description Merges two arrays into one.
+ * @param {any[]} array - First array (modified in place).
+ * @param {any[]} newArray - Array to append.
+ * @param {number} [index=array.length] - Start index to append at.
+ * @param {number} [newArrayIndex=0] - Index in new array.
+ * @returns {any[]} Merged array.
+ */
 function mergeArray(array, newArray, index = array.length, newArrayIndex = 0) {
 
     if (newArrayIndex == newArray.length)
